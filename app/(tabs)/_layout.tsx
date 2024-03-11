@@ -1,59 +1,77 @@
-import React from 'react';
-import FontAwesome from '@expo/vector-icons/FontAwesome';
-import { Link, Tabs } from 'expo-router';
-import { Pressable } from 'react-native';
+import React from "react";
+import { Tabs } from "expo-router";
+import Colors from "@/constants/Colors";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { Feather } from "@expo/vector-icons";
+import { Ionicons, FontAwesome5 } from "@expo/vector-icons";
 
-import Colors from '@/constants/Colors';
-import { useColorScheme } from '@/components/useColorScheme';
-import { useClientOnlyValue } from '@/components/useClientOnlyValue';
-
-// You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
-function TabBarIcon(props: {
-  name: React.ComponentProps<typeof FontAwesome>['name'];
-  color: string;
-}) {
-  return <FontAwesome size={28} style={{ marginBottom: -3 }} {...props} />;
-}
-
-export default function TabLayout() {
-  const colorScheme = useColorScheme();
-
-  return (
-    <Tabs
-      screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
-        // Disable the static render of the header on web
-        // to prevent a hydration error in React Navigation v6.
-        headerShown: useClientOnlyValue(false, true),
-      }}>
-      <Tabs.Screen
-        name="index"
-        options={{
-          title: 'Tab One',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
-          headerRight: () => (
-            <Link href="/modal" asChild>
-              <Pressable>
-                {({ pressed }) => (
-                  <FontAwesome
-                    name="info-circle"
-                    size={25}
-                    color={Colors[colorScheme ?? 'light'].text}
-                    style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }}
-                  />
-                )}
-              </Pressable>
-            </Link>
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="two"
-        options={{
-          title: 'Tab Two',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
-        }}
-      />
-    </Tabs>
-  );
+export default function Layout() {
+    return (
+        <Tabs
+            screenOptions={{
+                tabBarActiveTintColor: Colors.primary,
+                tabBarLabelStyle: {
+                    fontFamily: "mon-sb",
+                },
+            }}
+        >
+            <Tabs.Screen
+                name="index"
+                options={{
+                    tabBarLabel: "검색",
+                    tabBarIcon: ({ color, size }) => (
+                        <Ionicons name="search" color={color} size={size} />
+                    ),
+                }}
+            />
+            <Tabs.Screen
+                name="wishlists"
+                options={{
+                    tabBarLabel: "위시리스트",
+                    tabBarIcon: ({ color, size }) => (
+                        <Ionicons
+                            name="heart-outline"
+                            color={color}
+                            size={size}
+                        />
+                    ),
+                }}
+            />
+            <Tabs.Screen
+                name="trips"
+                options={{
+                    tabBarLabel: "여행",
+                    tabBarIcon: ({ color, size }) => (
+                        <FontAwesome5 name="airbnb" color={color} size={size} />
+                    ),
+                }}
+            />
+            <Tabs.Screen
+                name="message"
+                options={{
+                    tabBarLabel: "메시지",
+                    tabBarIcon: ({ color, size }) => (
+                        <MaterialCommunityIcons
+                            name="message-outline"
+                            color={color}
+                            size={size}
+                        />
+                    ),
+                }}
+            />
+            <Tabs.Screen
+                name="profile"
+                options={{
+                    tabBarLabel: "프로필",
+                    tabBarIcon: ({ color, size }) => (
+                        <Ionicons
+                            name="person-circle-outline"
+                            color={color}
+                            size={size}
+                        />
+                    ),
+                }}
+            />
+        </Tabs>
+    );
 }
