@@ -1,9 +1,11 @@
 import React from "react";
 import { Tabs } from "expo-router";
 import Colors from "@/constants/Colors";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { Feather } from "@expo/vector-icons";
-import { Ionicons, FontAwesome5 } from "@expo/vector-icons";
+import {
+    Ionicons,
+    FontAwesome5,
+    MaterialCommunityIcons,
+} from "@expo/vector-icons";
 
 export default function Layout() {
     return (
