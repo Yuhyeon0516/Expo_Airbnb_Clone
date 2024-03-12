@@ -14,15 +14,26 @@ import { Detail } from "@/types/Detail";
 import { Ionicons } from "@expo/vector-icons";
 import Animated, { FadeInRight, FadeOutLeft } from "react-native-reanimated";
 import { numberWithComma } from "@/util/util";
+import {
+    BottomSheetFlatList,
+    BottomSheetFlatListMethods,
+} from "@gorhom/bottom-sheet";
 
 type DetailsProps = {
     details: any[];
     category: string;
+    refresh: number;
 };
 
-export default function Details({ details, category }: DetailsProps) {
+export default function Details({ details, category, refresh }: DetailsProps) {
     const [loading, setLoading] = useState(false);
-    const flatListRef = useRef<FlatList>(null);
+    const flatListRef = useRef<BottomSheetFlatListMethods>(null);
+
+    useEffect(() => {
+        if (refresh) {
+            flatListRef.current?.scrollToOffset({ offset: 0, animated: true });
+        }
+    }, [refresh]);
 
     useEffect(() => {
         setLoading(true);
@@ -33,11 +44,14 @@ export default function Details({ details, category }: DetailsProps) {
     }, [category]);
 
     return (
-        <View style={[defaultStyles.container, { marginTop: 130 }]}>
-            <FlatList
+        <View style={defaultStyles.container}>
+            <BottomSheetFlatList
                 ref={flatListRef}
                 data={loading ? [] : details}
                 renderItem={renderRow}
+                ListHeaderComponent={
+                    <Text style={styles.info}>방 {details.length}개</Text>
+                }
             />
         </View>
     );
@@ -117,5 +131,11 @@ const styles = StyleSheet.create({
         width: "100%",
         height: 300,
         borderRadius: 10,
+    },
+    info: {
+        textAlign: "center",
+        fontFamily: "mon-sb",
+        fontSize: 16,
+        marginTop: 4,
     },
 });

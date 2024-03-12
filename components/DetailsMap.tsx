@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View } from "react-native";
-import React from "react";
+import React, { memo } from "react";
 import listingDataGeo from "@/assets/data/airbnb-listings.geo.json";
 import { Marker, PROVIDER_GOOGLE } from "react-native-maps";
 import { useRouter } from "expo-router";
@@ -17,7 +17,7 @@ const INITIAL_REGION = {
     longitudeDelta: 9,
 };
 
-export default function DetailsMap({ details }: DetailsMapProps) {
+function DetailsMap({ details }: DetailsMapProps) {
     const router = useRouter();
 
     function onPressMarker(detailId: string) {
@@ -93,7 +93,6 @@ export default function DetailsMap({ details }: DetailsMapProps) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        marginTop: 130,
     },
     marker: {
         backgroundColor: "#fff",
@@ -115,3 +114,5 @@ const styles = StyleSheet.create({
         fontFamily: "mon-sb",
     },
 });
+
+export default memo(DetailsMap);
