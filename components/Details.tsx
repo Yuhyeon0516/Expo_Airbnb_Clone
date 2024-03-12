@@ -13,6 +13,7 @@ import { Link } from "expo-router";
 import { Detail } from "@/types/Detail";
 import { Ionicons } from "@expo/vector-icons";
 import Animated, { FadeInRight, FadeOutLeft } from "react-native-reanimated";
+import { numberWithComma } from "@/util/util";
 
 type DetailsProps = {
     details: any[];
@@ -70,10 +71,21 @@ function renderRow({ item }: { item: Detail }) {
                             justifyContent: "space-between",
                         }}
                     >
-                        <Text style={{ fontSize: 16, fontFamily: "mon-sb" }}>
+                        <Text
+                            style={{
+                                fontSize: 16,
+                                fontFamily: "mon-sb",
+                                flexShrink: 2,
+                            }}
+                        >
                             {item.name}
                         </Text>
-                        <View style={{ flexDirection: "row" }}>
+                        <View
+                            style={{
+                                flexDirection: "row",
+                                flexShrink: 1,
+                            }}
+                        >
                             <Ionicons name="star" size={16} />
                             <Text style={{ fontFamily: "mon-sb" }}>
                                 {item.review_scores_rating / 20}
@@ -85,7 +97,7 @@ function renderRow({ item }: { item: Detail }) {
 
                     <View style={{ flexDirection: "row", gap: 4 }}>
                         <Text style={{ fontFamily: "mon-sb" }}>
-                            ₩ {item.price * 1324}원
+                            ₩ {numberWithComma(item.price * 1324)}원
                         </Text>
                         <Text style={{ fontFamily: "mon" }}>/박</Text>
                     </View>

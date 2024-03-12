@@ -19,6 +19,7 @@ import Animated, {
 import Colors from "@/constants/Colors";
 import { Ionicons } from "@expo/vector-icons";
 import { defaultStyles } from "@/constants/Styles";
+import { numberWithComma } from "@/util/util";
 
 type PageParams = {
     id: string;
@@ -171,7 +172,7 @@ export default function Page() {
                 >
                     <TouchableOpacity style={styles.footerText}>
                         <Text style={{ fontFamily: "mon-sb" }}>
-                            ₩ {(detail.price ?? 0) * 1324}원
+                            ₩ {numberWithComma((detail.price ?? 0) * 1324)}원
                         </Text>
                         <Text style={{ fontFamily: "mon" }}>/박</Text>
                     </TouchableOpacity>
