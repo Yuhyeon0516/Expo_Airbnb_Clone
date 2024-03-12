@@ -12,6 +12,7 @@ import { defaultStyles } from "@/constants/Styles";
 import { Link } from "expo-router";
 import { Detail } from "@/types/Detail";
 import { Ionicons } from "@expo/vector-icons";
+import Animated, { FadeInRight, FadeOutLeft } from "react-native-reanimated";
 
 type DetailsProps = {
     details: any[];
@@ -30,10 +31,26 @@ export default function Details({ details, category }: DetailsProps) {
         }, 200);
     }, [category]);
 
-    const renderRow: ListRenderItem<Detail> = ({ item }) => (
+    return (
+        <View style={[defaultStyles.container, { marginTop: 130 }]}>
+            <FlatList
+                ref={flatListRef}
+                data={loading ? [] : details}
+                renderItem={renderRow}
+            />
+        </View>
+    );
+}
+
+function renderRow({ item }: { item: Detail }) {
+    return (
         <Link href={`/detail/${item.id}`} asChild>
             <TouchableOpacity>
-                <View style={styles.detail}>
+                <Animated.View
+                    style={styles.detail}
+                    entering={FadeInRight}
+                    exiting={FadeOutLeft}
+                >
                     <Image
                         source={{ uri: item.medium_url }}
                         style={styles.image}
@@ -72,19 +89,9 @@ export default function Details({ details, category }: DetailsProps) {
                         </Text>
                         <Text style={{ fontFamily: "mon" }}>/박</Text>
                     </View>
-                </View>
+                </Animated.View>
             </TouchableOpacity>
         </Link>
-    );
-
-    return (
-        <View style={[defaultStyles.container, { marginTop: 130 }]}>
-            <FlatList
-                ref={flatListRef}
-                data={loading ? [] : details}
-                renderItem={renderRow}
-            />
-        </View>
     );
 }
 
