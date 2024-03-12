@@ -435,3 +435,44 @@ export function useWarmUpBrowser() {
     }, []);
 }
 ```
+
+### Airbnb listing data
+
+Airbnb와 유사하게 만들려면 실제 Airbnb와 같은 data가 필요하겠다고 생각이 들었다.  
+어떻게 구할 수 있을까 했는데 opendatasoft라는 곳에서 제공을 해주고 있었다.[(Link)](https://public.opendatasoft.com/explore/dataset/airbnb-listings/table/?disjunctive.host_verifications&disjunctive.amenities&disjunctive.features&q=가&dataChart=eyJxdWVyaWVzIjpbeyJjaGFydHMiOlt7InR5cGUiOiJjb2x1bW4iLCJmdW5jIjoiQ09VTlQiLCJ5QXhpcyI6Imhvc3RfbGlzdGluZ3NfY291bnQiLCJzY2llbnRpZmljRGlzcGxheSI6dHJ1ZSwiY29sb3IiOiJyYW5nZS1jdXN0b20ifV0sInhBeGlzIjoiY2l0eSIsIm1heHBvaW50cyI6IiIsInRpbWVzY2FsZSI6IiIsInNvcnQiOiIiLCJzZXJpZXNCcmVha2Rvd24iOiJyb29tX3R5cGUiLCJjb25maWciOnsiZGF0YXNldCI6ImFpcmJuYi1saXN0aW5ncyIsIm9wdGlvbnMiOnsiZGlzanVuY3RpdmUuaG9zdF92ZXJpZmljYXRpb25zIjp0cnVlLCJkaXNqdW5jdGl2ZS5hbWVuaXRpZXMiOnRydWUsImRpc2p1bmN0aXZlLmZlYXR1cmVzIjp0cnVlLCJxIjoiXHVBQzAwIn19fV0sInRpbWVzY2FsZSI6IiIsImRpc3BsYXlMZWdlbmQiOnRydWUsImFsaWduTW9udGgiOnRydWV9)  
+한국의 data를 얻고싶었지만 아쉽게도 한국의 data는 제공해주지 않아, 외국에서 한인들이 운영하는것으로 추정되는 "가"라는 text가 들어간 정보 106개를 filtering하여 가져왔다.(물론 제대로 영어로 된것도 꽤 있음)
+
+### react-native-reanimated
+
+Animation을 위해 react-native-reanimated를 사용해보기로 하였다.  
+예전부터 React Native의 Animated를 사용하면서 직접 animation을 구현하고 하는것이 생각보다 번거로운 일이라고 생각이 들었기 때문에 간단한 clone을 진행하면서 미리 구현된 animation을 쓰기위해 선택하였다.  
+`npx expo install react-native-reanimated` 명령어로 install하면 되고, 사용을 위해 `babel.config.js`에 plugin도 등록을 해주어야한다.
+
+```javascript
+module.exports = function (api) {
+    api.cache(true);
+    return {
+        presets: ["babel-preset-expo"],
+        plugins: ["react-native-reanimated/plugin"], //<= 추가
+    };
+};
+```
+
+자세한 사용법이나 animation 종류는 link를 확인하면 된다 [(Link)](https://docs.swmansion.com/react-native-reanimated/)
+
+### React Native Share function
+
+이번 clone을 하면서 Share를 처음 써보았다.  
+React Native에서 기본으로 Share sheet가 올라오는 function을 제공해주어서 `async-await`을 이용하여 아래와 같이 사용하면된다.  
+매번 어떻게 쓰면 될지 궁금했는데 생각보다 쉬웠다.
+
+```javascript
+try {
+    await Share.share({
+        title: detail.name,
+        url: detail.listing_url,
+    });
+} catch (error) {
+    console.error("Share error: ", error);
+}
+```
