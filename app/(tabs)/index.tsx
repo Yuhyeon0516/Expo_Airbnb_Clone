@@ -5,6 +5,8 @@ import ExploreHeader from "@/components/ExploreHeader";
 import Details from "@/components/Details";
 import { exploreCategories } from "@/constants/ExploreCategories";
 import listingData from "@/assets/data/airbnb-listings.json";
+import DetailsMap from "@/components/DetailsMap";
+import listingDataGeo from "@/assets/data/airbnb-listings.geo.json";
 
 export default function Page() {
     const [category, setCategory] = useState(exploreCategories[0].name);
@@ -23,7 +25,8 @@ export default function Page() {
                     ),
                 }}
             />
-            <Details details={items} category={category} />
+            {/* <Details details={items} category={category} /> */}
+            <DetailsMap details={listingDataGeo} />
         </View>
     );
 }
