@@ -476,3 +476,22 @@ try {
     console.error("Share error: ", error);
 }
 ```
+
+### react-native-map & react-native-map-clustering
+
+지도에 숙소 리스트를 표시하기 위해 react-native-map library를 사용하였다.[(Link)](https://github.com/react-native-maps/react-native-maps)  
+별다른 설정없이 `npx expo install react-native-maps`을 진행하면 install됨.  
+react-native-map library는 기본적으로 platform에 맞게 지도를 표시해준다.(Android는 GoogleMap, iOS는 AppleMap)  
+이번 프로젝트에는 platform에 상관없이 GoogleMap만 사용하기 위해 `<MapView>` component의 `provider` prop으로 `PROVIDER_GOOGLE`을 넘겨주었다.(사실 한국에서는 애플맵이 UX적으로 친화적이지 않은듯하여..)  
+그리고 custom marker를 작성하여 지도에 금액이 표시되도록 Marker를 작성하였다.  
+그러나 금액을 전체적으로 뿌리니 여러 숙소가 있는 장소들은 가격들이 중첩되어 보여졌다.(물론 실제 Airbnb도 동일하게 중첩되어 보이나 보기에 너무 안좋은것같았음)
+
+![Before](https://github.com/Yuhyeon0516/Expo_Airbnb_Clone/assets/120432007/8c90756b-d16a-4c9e-8e4f-8e7018b69fb4)
+
+그래서 보기에 좋게 바꾸는 방법이 없을까 찾다가 `react-native-map-clustering`을 찾게되었다.[(Link)](https://github.com/venits/react-native-map-clustering)  
+해당 library를 간단히 표현하자면 `<Marker>`가 특정지역에 중첩되어있으면 몇개인지 표시를 해주는 library라고 생각하면된다.  
+`npx expo install react-native-map-clustering`를 진행하면 간단하게 install할 수 있었고 사용법도 `react-native-map`과 같았다.  
+그래서 최종적으로 아래와 같은 지도의 형태와 동작들을 만들 수 있었다.
+
+![After](https://github.com/Yuhyeon0516/Expo_Airbnb_Clone/assets/120432007/0a7058a7-1c2d-402b-8189-0ea91d6cfdd9)
+
