@@ -486,7 +486,7 @@ react-native-map library는 기본적으로 platform에 맞게 지도를 표시�
 그리고 custom marker를 작성하여 지도에 금액이 표시되도록 Marker를 작성하였다.  
 그러나 금액을 전체적으로 뿌리니 여러 숙소가 있는 장소들은 가격들이 중첩되어 보여졌다.(물론 실제 Airbnb도 동일하게 중첩되어 보이나 보기에 너무 안좋은것같았음)
 
-![Before](https://github.com/Yuhyeon0516/Expo_Airbnb_Clone/assets/120432007/8c90756b-d16a-4c9e-8e4f-8e7018b69fb4)
+<img src="https://github.com/Yuhyeon0516/Expo_Airbnb_Clone/assets/120432007/8c90756b-d16a-4c9e-8e4f-8e7018b69fb4" width=60%>
 
 그래서 보기에 좋게 바꾸는 방법이 없을까 찾다가 `react-native-map-clustering`을 찾게되었다.[(Link)](https://github.com/venits/react-native-map-clustering)  
 해당 library를 간단히 표현하자면 `<Marker>`가 특정지역에 중첩되어있으면 몇개인지 표시를 해주는 library라고 생각하면된다.  
@@ -494,4 +494,31 @@ react-native-map library는 기본적으로 platform에 맞게 지도를 표시�
 그래서 최종적으로 아래와 같은 지도의 형태와 동작들을 만들 수 있었다.
 
 ![After](https://github.com/Yuhyeon0516/Expo_Airbnb_Clone/assets/120432007/0a7058a7-1c2d-402b-8189-0ea91d6cfdd9)
+
+### @gorhom/bottom-sheet
+
+실제 배포가 아닌 clone을 진행하면서 bottom sheet를 직접 만드는것은 너무 큰 수고인것 같아 많은 사람들이 사용하고있는 `@gorhom/bottom-sheet`를 사용하기로 하였다.[(Link)](https://ui.gorhom.dev/components/bottom-sheet)  
+설치법은 `npm i @gorhom/bottom-sheet@^4`후 의존성으로 `react-native-reanimated`와 `react-native-gesture-handler`를 설치하여야하여 `npx expo install react-native-reanimated react-native-gesture-handler`를 진행하여야한다.  
+`<BottomSheet>` component를 이용하여 사용하면 되고, `snapPoints` prop으로 시작 지점과 끝 지점을 정의할 수 있다.  
+더 많은 option이 있으니 나중에 쓰게되면 필요한게 있는지 docs를 참고하면 될 것 같다.
+
+### expo-blur
+
+`expo-blur`는 blur background를 가지는 `<BlurView>`를 편한게 쓸 수 있도록 expo에서 제공해주는 library이다.[(Link)](https://docs.expo.dev/versions/latest/sdk/blur-view/)  
+`intensity`, `tint` 등 여러 option을 prop으로 전달해주면 custom도 가능하여 생각보다 편리하였다.(물론 직접 만드는것도 크게 어렵진 않음)
+
+### Screenshots
+
+<div style="display: flex; flex-direction: 'row';">
+<img src="./screenshots/1.png" width=40%>
+<img src="./screenshots/2.png" width=40%>
+<img src="./screenshots/3.png" width=40%>
+<img src="./screenshots/4.png" width=40%>
+<img src="./screenshots/5.png" width=40%>
+<img src="./screenshots/6.png" width=40%>
+</div>
+
+### Demo video
+
+![Demo](https://github.com/Yuhyeon0516/Expo_Airbnb_Clone/assets/120432007/b62d05db-c49b-4469-884e-2155a9989fb8)
 
