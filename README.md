@@ -520,4 +520,5 @@ react-native-map library는 기본적으로 platform에 맞게 지도를 표시�
 
 ### Demo video
 
-![Demo]()
+![Demo](https://github.com/Yuhyeon0516/Expo_Airbnb_Clone/assets/120432007/b62d05db-c49b-4469-884e-2155a9989fb8)
+
